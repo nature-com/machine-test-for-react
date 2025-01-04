@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { employeeView, updateEmployee } from "../../reducers/EmployeeSlice";
 import { toast, ToastContainer } from "react-toastify";
-import HeaderNew from "../../components/Header";
+import Header from "../../components/Header";
 
 const EditEmployee = () => {
     const navigate = useNavigate();
@@ -70,7 +70,7 @@ const EditEmployee = () => {
         <>
             <ToastContainer />
 
-            <HeaderNew employeeDetails={employeeDetails} />
+            <Header employeeDetails={employeeDetails} />
 
             <div className="flex h-screen overflow-hidden">
 

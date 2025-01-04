@@ -1,7 +1,7 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Profile } from "../assets/images/images";
 
-const HeaderNew = ({ employeeDetails }) => {
+const Header = ({ employeeDetails }) => {
     console.log("employeeDetails", employeeDetails)
 
     return (
@@ -34,4 +34,4 @@ const HeaderNew = ({ employeeDetails }) => {
     )
 }
 
-export default HeaderNew;
+export default Header;

@@ -1,7 +1,6 @@
 import { AiOutlineDelete } from "react-icons/ai";
 import { Table } from "flowbite-react";
 import { Link } from "react-router-dom";
-import { HiUser } from "react-icons/hi2";
 import { RiEdit2Fill } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
