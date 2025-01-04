@@ -96,7 +96,7 @@ const EditEmployee = () => {
                                                 >
                                                     {loadingUpdate ? "Saving..." : "Save"} <CiSaveDown2 className="text-xl ml-1" />
                                                 </button>
-                                                <button type="button" onClick={() => { navigate("/employee") }} className="bg-[#A63535] hover:bg-black text-white text-base px-5 py-1.5 rounded-lg mr-0 flex items-center">
+                                                <button type="button" onClick={() => { navigate("/") }} className="bg-[#A63535] hover:bg-black text-white text-base px-5 py-1.5 rounded-lg mr-0 flex items-center">
                                                     Cancel <AiOutlineDelete className="text-xl ml-1" />
                                                 </button>
                                             </div>

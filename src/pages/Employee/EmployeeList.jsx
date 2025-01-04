@@ -12,11 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { employeeList } from "../../reducers/EmployeeSlice";
 import DeleteEmployee from "./DeleteEmployee";
 import { ToastContainer } from "react-toastify";
+import Loader from "../../loader/Loader";
 
 const EmployeeList = () => {
     const dispatch = useDispatch();
     const [openRegistrationSuccessModal, setOpenRegistrationSuccessModal] = useState(false);
-    const { employeeListing } = useSelector((state) => state?.employee);
+    const { loadingList, employeeListing } = useSelector((state) => state?.employee);
     console.log("employeeListing", employeeListing)
     const [employeeId, setEmployeeId] = useState();
 
@@ -40,20 +41,6 @@ const EmployeeList = () => {
                     <main>
                         <div className="mx-auto p-4 md:p-6 2xl:p-10">
                             <div>
-                                {/* <div className="flex justify-between my-8">
-                    <h2 className="text-[#231000] text-2xl font-bold mr-4 mb-8">Employees</h2>
-                    <div>
-                        <Link
-                            to="/modify-information"
-                            className="text-[#231000] bg-[#F6BC56] px-4 py-2 font-semibold rounded-[10px] flex items-center"
-                        >
-                            Add <GoPlusCircle className="ml-2" />
-                        </Link>
-                    </div>
-                </div> */}
-                                {/*  */}
-
-                                {/*  */}
                                 <div className="mt-8">
                                     <div className="overflow-x-auto">
                                         <Table hoverable>
@@ -130,6 +117,15 @@ const EmployeeList = () => {
                                                         </Table.Cell>
                                                     </Table.Row>
                                                 ))}
+                                                {loadingList &&
+                                                    <Table.Row>
+                                                        <Table.Cell colSpan="8" className="p-4 text-center">
+                                                            <div className="flex justify-center items-center w-full h-full">
+                                                                <Loader />
+                                                            </div>
+                                                        </Table.Cell>
+                                                    </Table.Row>
+                                                }
                                             </Table.Body>
                                         </Table>
                                     </div>

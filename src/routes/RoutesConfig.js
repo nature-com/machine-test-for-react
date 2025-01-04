@@ -4,7 +4,7 @@ import EditEmployee from "../pages/Employee/EditEmployee.jsx";
 const allRoutes = [
 
   {
-    path: '/employee',
+    path: '/',
     element: <EmployeeList />,
   },
   {

@@ -73,6 +73,7 @@ const initialState = {
     loading: false,
     error: null,
     message: null,
+    loadingList: false,
     employeeListing: {},
     employeeDetails: {},
     loadingUpdate: false,
@@ -86,15 +87,15 @@ const employeeSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(employeeList.pending, (state) => {
-                state.loading = true;
+                state.loadingList = true;
                 state.error = null;
             })
             .addCase(employeeList.fulfilled, (state, { payload }) => {
-                state.loading = false;
+                state.loadingList = false;
                 state.employeeListing = payload;
             })
             .addCase(employeeList.rejected, (state, action) => {
-                state.loading = false;
+                state.loadingList = false;
                 state.error = action?.payload;
             })
 
