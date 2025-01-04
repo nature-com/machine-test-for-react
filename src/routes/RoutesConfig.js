@@ -1,15 +1,27 @@
-import EmployeeList from '../pages/Employee/EmployeeList.jsx';
-import EditEmployee from "../pages/Employee/EditEmployee.jsx";
+import { lazy, Suspense } from 'react';
+
+const EmployeeList = lazy(() => import('../pages/Employee/EmployeeList.jsx'));
+const EditEmployee = lazy(() => import('../pages/Employee/EditEmployee.jsx'));
+
+const Loading = () => <div>Loading...</div>;
 
 const allRoutes = [
 
   {
     path: '/',
-    element: <EmployeeList />,
+    element: (
+      <Suspense fallback={<Loading />}>
+        <EmployeeList />
+      </Suspense>
+    ),
   },
   {
     path: '/edit-employee',
-    element: <EditEmployee />,
+    element: (
+      <Suspense fallback={<Loading />}>
+        <EditEmployee />
+      </Suspense>
+    ),
   },
 
   {
