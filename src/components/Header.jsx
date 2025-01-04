@@ -1,4 +1,5 @@
 import { FaArrowRightLong } from "react-icons/fa6";
+import { Profile } from "../assets/images/images";
 
 const HeaderNew = ({ employeeDetails }) => {
     console.log("employeeDetails", employeeDetails)
@@ -21,7 +22,7 @@ const HeaderNew = ({ employeeDetails }) => {
 
                     <div className="w-10 h-10 rounded-full overflow-hidden">
                         <img
-                            src={employeeDetails?.data?.image ? employeeDetails?.data?.image : "https://via.placeholder.com/40"}
+                            src={employeeDetails?.data?.image ? employeeDetails?.data?.image : Profile}
                             alt="User Profile"
                             className="w-full h-full object-cover"
                         />

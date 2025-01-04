@@ -1,10 +1,6 @@
-import { AiOutlineDelete, AiOutlineSearch } from "react-icons/ai";
-import { grayLoader, greenClock, redDoller } from "../../assets/images/images";
-import { Checkbox, Modal, Select, Table } from "flowbite-react";
-import { GrUpdate } from "react-icons/gr";
-import { PiExportLight } from "react-icons/pi";
+import { AiOutlineDelete } from "react-icons/ai";
+import { Table } from "flowbite-react";
 import { Link } from "react-router-dom";
-import { GoPlusCircle } from "react-icons/go";
 import { HiUser } from "react-icons/hi2";
 import { RiEdit2Fill } from "react-icons/ri";
 import { useEffect, useState } from "react";
@@ -13,6 +9,7 @@ import { employeeList } from "../../reducers/EmployeeSlice";
 import DeleteEmployee from "./DeleteEmployee";
 import { ToastContainer } from "react-toastify";
 import Loader from "../../loader/Loader";
+import { Profile } from "../../assets/images/images";
 
 const EmployeeList = () => {
     const dispatch = useDispatch();
@@ -77,7 +74,7 @@ const EmployeeList = () => {
                                                         <Table.Cell className="text-[#231000] text-sm font-[15px]">
                                                             <div className="w-[50px] h-[50px] bg-[#828aa1] rounded-full mr-2 flex justify-center items-center">
                                                                 <img
-                                                                    src={emp?.image ? emp?.image : <HiUser />}
+                                                                    src={emp?.image ? emp?.image : Profile}
                                                                     alt="Profile"
                                                                     className="w-full h-full object-cover rounded-full"
                                                                 />

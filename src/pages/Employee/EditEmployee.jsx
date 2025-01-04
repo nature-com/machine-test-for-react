@@ -1,11 +1,10 @@
-import { Label, Select, TextInput } from "flowbite-react";
+import { Label, TextInput } from "flowbite-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineDelete } from "react-icons/ai";
 import { CiSaveDown2 } from "react-icons/ci";
-import { FaArrowRightLong } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { employeeView, updateEmployee } from "../../reducers/EmployeeSlice";
 import { toast, ToastContainer } from "react-toastify";
 import HeaderNew from "../../components/Header";
