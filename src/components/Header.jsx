@@ -2,7 +2,6 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { Profile } from "../assets/images/images";
 
 const Header = ({ employeeDetails }) => {
-    console.log("employeeDetails", employeeDetails)
 
     return (
         <>

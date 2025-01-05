@@ -3,7 +3,7 @@ import { lazy, Suspense } from 'react';
 const EmployeeList = lazy(() => import('../pages/Employee/EmployeeList.jsx'));
 const EditEmployee = lazy(() => import('../pages/Employee/EditEmployee.jsx'));
 
-const Loading = () => <div>Loading...</div>;
+const Loading = () => <div className='text-center'>Loading...</div>;
 
 const allRoutes = [
 

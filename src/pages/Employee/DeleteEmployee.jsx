@@ -1,16 +1,15 @@
-import { Modal } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteEmployee, employeeList } from "../../reducers/EmployeeSlice";
 import { toast } from "react-toastify";
+import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Typography } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const DeleteEmployee = ({ openRegistrationSuccessModal, setOpenRegistrationSuccessModal, employeeId }) => {
-    console.log("employeeId", employeeId);
     const dispatch = useDispatch();
     const { loadingDelete } = useSelector((state) => state?.employee);
 
     const handleDeleteYes = () => {
         dispatch(deleteEmployee(employeeId)).then((res) => {
-            console.log("Delete Res", res);
             if (res?.payload?.code === 200) {
                 toast.success(res?.payload?.message, {
                     position: "top-right",
@@ -20,6 +19,8 @@ const DeleteEmployee = ({ openRegistrationSuccessModal, setOpenRegistrationSucce
                     progress: undefined,
                     theme: "light",
                 });
+                dispatch(employeeList());
+                setOpenRegistrationSuccessModal(false);
             } else {
                 toast.error(res?.payload?.message, {
                     position: "top-right",
@@ -30,8 +31,6 @@ const DeleteEmployee = ({ openRegistrationSuccessModal, setOpenRegistrationSucce
                     theme: "dark",
                 });
             }
-            dispatch(employeeList());
-            setOpenRegistrationSuccessModal(false);
         })
     };
 
@@ -41,31 +40,76 @@ const DeleteEmployee = ({ openRegistrationSuccessModal, setOpenRegistrationSucce
 
     return (
         <>
-            <Modal
-                show={openRegistrationSuccessModal}
+            <Dialog
+                open={openRegistrationSuccessModal}
                 onClose={() => setOpenRegistrationSuccessModal(false)}
-                size="xl"
+                maxWidth="sm"
+                fullWidth
+                sx={{
+                    "& .MuiPaper-root": {
+                        borderRadius: 4,
+                    },
+                }}
             >
-                <Modal.Header className="border-none absolute right-0">
-                    &nbsp;
-                </Modal.Header>
-                <Modal.Body>
-                    <div className="py-6">
-                        <p className="text-[#030229] text-xl font-bold text-center px-16 mb-4">
-                            Delete employee?
-                        </p>
-                        <div className="text-center mb-2">
-                            Are you sure you want to delete this employee?
-                        </div>
-                        <button onClick={() => handleDeleteYes()} className="bg-[#f6bc56] w-full text-[#231000] hover:bg-[#231000] hover:text-[#f6bc56] text-[18px] font-bold rounded-lg py-3 mt-6">
-                            {loadingDelete ? "Deleting..." : "Yes"}
-                        </button>
-                        <button onClick={() => handleDeleteNo()} className="bg-white border border-[#f6bc56] w-full text-[#231000] hover:bg-[#231000] hover:text-[#f6bc56] block text-center text-[18px] font-bold rounded-lg py-3 mt-4">
-                            No
-                        </button>
-                    </div>
-                </Modal.Body>
-            </Modal>
+                <DialogTitle sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <Typography variant="h6" align="center" sx={{ flexGrow: 1, fontWeight: "bold" }}>
+                        Delete Employee?
+                    </Typography>
+                    <IconButton
+                        aria-label="close"
+                        onClick={() => setOpenRegistrationSuccessModal(false)}
+                        sx={{
+                            position: "absolute",
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                </DialogTitle>
+                <DialogContent>
+                    <Typography variant="body1" align="center">
+                        Are you sure you want to delete this employee?
+                    </Typography>
+                </DialogContent>
+                <DialogActions sx={{ display: "flex", flexDirection: "column", gap: 2, p: 3 }}>
+                    <Button
+                        onClick={handleDeleteYes}
+                        variant="contained"
+                        fullWidth
+                        sx={{
+                            fontWeight: "bold", fontSize: 16, borderRadius: 2,
+                            backgroundColor: "#D4A017",
+                            color: "black",
+                            "&:hover": {
+                                backgroundColor: "black",
+                                color: "#D4A017",
+                            },
+                        }}
+                    >
+                        {loadingDelete ? <CircularProgress size={24} color="inherit" /> : "Yes"}
+                    </Button>
+                    <Button
+                        onClick={handleDeleteNo}
+                        variant="outlined"
+                        color="inherit"
+                        fullWidth
+                        sx={{
+                            fontWeight: "bold", fontSize: 16,
+                            borderRadius: 2,
+                            backgroundColor: "white",
+                            color: "black",
+                            "&:hover": {
+                                backgroundColor: "black",
+                                color: "#D4A017",
+                            },
+                        }}
+                    >
+                        No
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
     )
 }

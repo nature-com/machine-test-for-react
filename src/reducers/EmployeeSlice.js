@@ -6,7 +6,6 @@ export const employeeList = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await api.get('/employee/list');
-            console.log("response", response)
             if (response?.data?.code === 200) {
                 return response.data;
             } else {
@@ -23,7 +22,6 @@ export const employeeView = createAsyncThunk(
     async (id, { rejectWithValue }) => {
         try {
             const response = await api.get(`/employee/${id}`);
-            console.log("response", response)
             if (response?.data?.code === 200) {
                 return response.data;
             } else {
@@ -40,7 +38,6 @@ export const updateEmployee = createAsyncThunk(
     async ({ id, data }, { rejectWithValue }) => {
         try {
             const response = await api.put(`/employee-update/${id}`, data);
-            console.log("response", response)
             if (response?.data?.code === 200) {
                 return response.data;
             } else {
@@ -57,7 +54,6 @@ export const deleteEmployee = createAsyncThunk(
     async (id, { rejectWithValue }) => {
         try {
             const response = await api.delete(`/employee-remove/${id}`);
-            console.log("response", response)
             if (response?.data?.code === 200) {
                 return response.data;
             } else {
@@ -89,53 +85,59 @@ const employeeSlice = createSlice({
             .addCase(employeeList.pending, (state) => {
                 state.loadingList = true;
                 state.error = null;
+                state.message = null;
             })
             .addCase(employeeList.fulfilled, (state, { payload }) => {
                 state.loadingList = false;
                 state.employeeListing = payload;
+                state.message = payload?.message;
             })
-            .addCase(employeeList.rejected, (state, action) => {
+            .addCase(employeeList.rejected, (state, { payload }) => {
                 state.loadingList = false;
-                state.error = action?.payload;
+                state.error = payload?.message;
             })
 
             .addCase(employeeView.pending, (state) => {
                 state.loading = true;
                 state.error = null;
+                state.message = null;
             })
             .addCase(employeeView.fulfilled, (state, { payload }) => {
                 state.loading = false;
                 state.employeeDetails = payload;
+                state.message = payload?.message;
             })
-            .addCase(employeeView.rejected, (state, action) => {
+            .addCase(employeeView.rejected, (state, { payload }) => {
                 state.loading = false;
-                state.error = action?.payload;
+                state.error = payload?.message;
             })
 
             .addCase(updateEmployee.pending, (state) => {
                 state.loadingUpdate = true;
                 state.error = null;
+                state.message = null;
             })
             .addCase(updateEmployee.fulfilled, (state, { payload }) => {
                 state.loadingUpdate = false;
-                state.message = payload;
+                state.message = payload?.message;
             })
-            .addCase(updateEmployee.rejected, (state, action) => {
+            .addCase(updateEmployee.rejected, (state, { payload }) => {
                 state.loadingUpdate = false;
-                state.error = action?.payload;
+                state.error = payload?.message;
             })
 
             .addCase(deleteEmployee.pending, (state) => {
                 state.loadingDelete = true;
                 state.error = null;
+                state.message = null;
             })
             .addCase(deleteEmployee.fulfilled, (state, { payload }) => {
                 state.loadingDelete = false;
-                state.message = payload;
+                state.message = payload?.message;
             })
-            .addCase(deleteEmployee.rejected, (state, action) => {
+            .addCase(deleteEmployee.rejected, (state, { payload }) => {
                 state.loadingDelete = false;
-                state.error = action?.payload;
+                state.error = payload?.message;
             })
     },
 });

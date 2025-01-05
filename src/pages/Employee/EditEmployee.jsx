@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { employeeView, updateEmployee } from "../../reducers/EmployeeSlice";
 import { toast, ToastContainer } from "react-toastify";
 import Header from "../../components/Header";
+import Loader from "../../loader/Loader";
 
 const EditEmployee = () => {
     const navigate = useNavigate();
@@ -72,10 +73,14 @@ const EditEmployee = () => {
 
             <Header employeeDetails={employeeDetails} />
 
+            {loadingUpdate && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    <Loader />
+                </div>
+            )}
+
             <div className="flex h-screen overflow-hidden">
-
                 <div className="relative flex flex-1 flex-col">
-
                     <main>
                         <div className="mx-auto p-4 md:p-6 2xl:p-10">
                             <form onSubmit={handleSubmit(onSubmit)}>
@@ -84,7 +89,6 @@ const EditEmployee = () => {
                                         <div className="flex justify-between">
                                             <div>
                                                 <span className="text-[#BE7A3A] text-2xl font-bold mr-4 flex items-center ml-2">
-                                                    {/* <FaArrowRightLong className="text-base mr-3" /> */}
                                                     Edit Employee
                                                 </span>
                                             </div>
@@ -114,7 +118,7 @@ const EditEmployee = () => {
                                                         type="text"
                                                         sizing="md"
                                                         placeholder="Full name"
-                                                        {...register("fullName")}
+                                                        {...register("fullName", { required: "Full name is required" })}
                                                     />
                                                     {errors?.fullName && (
                                                         <span className="text-red-500 text-sm">{errors?.fullName?.message}</span>
@@ -131,6 +135,7 @@ const EditEmployee = () => {
                                                         sizing="md"
                                                         placeholder="Email"
                                                         {...register("email", {
+                                                            required: "Email is required",
                                                             pattern: {
                                                                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                                                                 message: "Invalid email format",
@@ -230,9 +235,7 @@ const EditEmployee = () => {
                             </form>
                         </div>
                     </main>
-
                 </div>
-
             </div>
         </>
     )

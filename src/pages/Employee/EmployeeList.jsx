@@ -1,5 +1,5 @@
 import { AiOutlineDelete } from "react-icons/ai";
-import { Table } from "flowbite-react";
+// import { Avatar, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { RiEdit2Fill } from "react-icons/ri";
 import { useEffect, useState } from "react";
@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { employeeList } from "../../reducers/EmployeeSlice";
 import DeleteEmployee from "./DeleteEmployee";
 import { ToastContainer } from "react-toastify";
-import Loader from "../../loader/Loader";
+// import Loader from "../../loader/Loader";
 import { Profile } from "../../assets/images/images";
+import { Avatar, Box, CircularProgress, Dialog, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 
 const EmployeeList = () => {
     const dispatch = useDispatch();
@@ -30,118 +31,114 @@ const EmployeeList = () => {
     return (
         <>
             <ToastContainer />
-            <div className="flex h-screen overflow-hidden">
 
-                <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-[#f1f1f1]">
+            <Box sx={{ backgroundColor: "#f1f1f1", height: "100vh", overflow: "auto", padding: 4 }}>
+                <Typography variant="h5"
+                    sx={{
+                        mb: 4,
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        textTransform: "uppercase",
+                        letterSpacing: 2,
+                        textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+                        position: "relative",
+                        "&::after": {
+                            content: '""',
+                            display: "block",
+                            width: "50%",
+                            height: "4px",
+                            backgroundColor: "#F6BC56",
+                            margin: "8px auto 0",
+                            borderRadius: "2px",
+                        },
+                    }}
+                >
+                    Employee List
+                </Typography>
 
-                    <main>
-                        <div className="mx-auto p-4 md:p-6 2xl:p-10">
-                            <div>
-                                <div className="mt-8">
-                                    <div className="overflow-x-auto">
-                                        <Table hoverable>
-                                            <Table.Head>
-                                                <Table.HeadCell className="p-4 bg-[#F6BC56]">
-                                                    &nbsp;
-                                                </Table.HeadCell>
-                                                <Table.HeadCell className="bg-[#F6BC56] text-[#231000] text-base font-bold capitalize">
-                                                    Profile Picture
-                                                </Table.HeadCell>
-                                                <Table.HeadCell className="bg-[#F6BC56] text-[#231000] text-base font-bold capitalize">
-                                                    Full Name
-                                                </Table.HeadCell>
-                                                <Table.HeadCell className="bg-[#F6BC56] text-[#231000] text-base font-bold capitalize">
-                                                    Email
-                                                </Table.HeadCell>
-                                                <Table.HeadCell className="bg-[#F6BC56] text-[#231000] text-base font-bold capitalize">
-                                                    Mobile Number
-                                                </Table.HeadCell>
-                                                <Table.HeadCell className="bg-[#F6BC56] text-[#231000] text-base font-bold capitalize">
-                                                    Age
-                                                </Table.HeadCell>
-                                                <Table.HeadCell className="bg-[#F6BC56] text-[#231000] text-base font-bold capitalize">
-                                                    Salary
-                                                </Table.HeadCell>
-                                                <Table.HeadCell className="bg-[#F6BC56]">&nbsp;</Table.HeadCell>
-                                            </Table.Head>
-                                            <Table.Body className="divide-y">
-                                                {employeeListing?.data && employeeListing?.data?.length > 0 && employeeListing?.data?.map((emp) => (
-                                                    <Table.Row key={emp?._id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                                        <Table.Cell className="p-4">
-                                                            &nbsp;
-                                                        </Table.Cell>
-                                                        <Table.Cell className="text-[#231000] text-sm font-[15px]">
-                                                            <div className="w-[50px] h-[50px] bg-[#828aa1] rounded-full mr-2 flex justify-center items-center">
-                                                                <img
-                                                                    src={emp?.image ? emp?.image : Profile}
-                                                                    alt="Profile"
-                                                                    className="w-full h-full object-cover rounded-full"
-                                                                />
-                                                            </div>
-                                                        </Table.Cell>
-                                                        <Table.Cell className="text-[#231000] text-sm font-[15px]">
-                                                            {emp?.fullName}
-                                                        </Table.Cell>
-                                                        <Table.Cell className="text-[#231000] text-sm font-[15px]">
-                                                            {emp?.email}
-                                                        </Table.Cell>
-                                                        <Table.Cell className="text-[#231000] text-sm font-[15px]">
-                                                            {emp?.phone}
-                                                        </Table.Cell>
-                                                        <Table.Cell className="text-[#231000] text-sm font-[15px]">
-                                                            {emp?.age}
-                                                        </Table.Cell>
-                                                        <Table.Cell className="text-[#231000] text-sm font-[15px]">
-                                                            {emp?.salary}
-                                                        </Table.Cell>
-                                                        <Table.Cell>
-                                                            <div className="flex items-center">
-                                                                <Link
-                                                                    to={`/edit-employee?id=${emp?._id}`}
-                                                                    className="bg-[#1E824C] p-2 rounded text-base font-medium text-white hover:underline dark:text-cyan-500 mx-4"
-                                                                >
-                                                                    <RiEdit2Fill />
-                                                                </Link>
-                                                                <div className="text-[#dcd3cb]">|</div>
-                                                                <button
-                                                                    onClick={() => handleDeleteEmp(emp?._id)}
-                                                                    className="bg-[#A63535] p-2 rounded text-base font-medium text-white hover:underline dark:text-cyan-500 mx-4"
-                                                                >
-                                                                    <AiOutlineDelete />
-                                                                </button>
-                                                            </div>
-                                                        </Table.Cell>
-                                                    </Table.Row>
-                                                ))}
-                                                {loadingList &&
-                                                    <Table.Row>
-                                                        <Table.Cell colSpan="8" className="p-4 text-center">
-                                                            <div className="flex justify-center items-center w-full h-full">
-                                                                <Loader />
-                                                            </div>
-                                                        </Table.Cell>
-                                                    </Table.Row>
-                                                }
-                                            </Table.Body>
-                                        </Table>
-                                    </div>
-                                </div>
-                                {/*  */}
+                <TableContainer sx={{ borderRadius: 4, overflow: "auto", boxShadow: 3 }}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell sx={{ fontWeight: "bold", backgroundColor: "#F6BC56" }}> &nbsp;</TableCell>
+                                <TableCell sx={{ fontWeight: "bold", backgroundColor: "#F6BC56" }}>Profile Picture</TableCell>
+                                <TableCell sx={{ fontWeight: "bold", backgroundColor: "#F6BC56" }}>Full Name</TableCell>
+                                <TableCell sx={{ fontWeight: "bold", backgroundColor: "#F6BC56" }}>Email</TableCell>
+                                <TableCell sx={{ fontWeight: "bold", backgroundColor: "#F6BC56" }}>Mobile Number</TableCell>
+                                <TableCell sx={{ fontWeight: "bold", backgroundColor: "#F6BC56" }}>Age</TableCell>
+                                <TableCell sx={{ fontWeight: "bold", backgroundColor: "#F6BC56" }}>Salary</TableCell>
+                                <TableCell sx={{ fontWeight: "bold", backgroundColor: "#F6BC56" }}>Actions</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {employeeListing?.data && employeeListing?.data?.length > 0 ? (
+                                employeeListing?.data.map((emp) => (
+                                    <TableRow key={emp?._id}>
+                                        <TableCell>&nbsp;</TableCell>
+                                        <TableCell>
+                                            <Avatar
+                                                src={emp?.image ? emp?.image : Profile}
+                                                alt="Profile"
+                                                sx={{ width: 50, height: 50 }}
+                                            />
+                                        </TableCell>
+                                        <TableCell>{emp?.fullName}</TableCell>
+                                        <TableCell>{emp?.email}</TableCell>
+                                        <TableCell>{emp?.phone}</TableCell>
+                                        <TableCell>{emp?.age}</TableCell>
+                                        <TableCell>{emp?.salary}</TableCell>
+                                        <TableCell>
+                                            <Box sx={{ display: "flex", alignItems: "center" }}>
+                                                <IconButton
+                                                    component={Link}
+                                                    to={`/edit-employee?id=${emp?._id}`}
+                                                    sx={{ color: "#1E824C" }}
+                                                >
+                                                    <RiEdit2Fill />
+                                                </IconButton>
+                                                <Box
+                                                    sx={{
+                                                        width: "1px",
+                                                        height: "24px",
+                                                        backgroundColor: "#ccc",
+                                                        mx: 1,
+                                                    }}
+                                                />
+                                                <IconButton
+                                                    onClick={() => handleDeleteEmp(emp?._id)}
+                                                    sx={{ color: "#A63535" }}
+                                                >
+                                                    <AiOutlineDelete />
+                                                </IconButton>
+                                            </Box>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : loadingList ? (
+                                <TableRow>
+                                    <TableCell colSpan={7} align="center">
+                                        <CircularProgress sx={{ color: '#BE7A3A' }} />
+                                    </TableCell>
+                                </TableRow>
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={7} align="center">
+                                        No employees found.
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
 
-                                {openRegistrationSuccessModal &&
-                                    <DeleteEmployee
-                                        openRegistrationSuccessModal={openRegistrationSuccessModal}
-                                        setOpenRegistrationSuccessModal={setOpenRegistrationSuccessModal}
-                                        employeeId={employeeId}
-                                    />
-                                }
-                            </div>
-                        </div>
-                    </main>
-
-                </div>
-
-            </div>
+                <Dialog open={openRegistrationSuccessModal} onClose={() => setOpenRegistrationSuccessModal(false)}>
+                    <DeleteEmployee
+                        openRegistrationSuccessModal={openRegistrationSuccessModal}
+                        setOpenRegistrationSuccessModal={setOpenRegistrationSuccessModal}
+                        employeeId={employeeId}
+                    />
+                </Dialog>
+            </Box>
 
         </>
     )
