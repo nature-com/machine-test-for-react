@@ -1,5 +1,4 @@
 import { AiOutlineDelete } from "react-icons/ai";
-// import { Avatar, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { RiEdit2Fill } from "react-icons/ri";
 import { useEffect, useState } from "react";
@@ -7,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { employeeList } from "../../reducers/EmployeeSlice";
 import DeleteEmployee from "./DeleteEmployee";
 import { ToastContainer } from "react-toastify";
-// import Loader from "../../loader/Loader";
 import { Profile } from "../../assets/images/images";
 import { Avatar, Box, CircularProgress, Dialog, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 
