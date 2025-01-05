@@ -116,13 +116,13 @@ const EmployeeList = () => {
                                 ))
                             ) : loadingList ? (
                                 <TableRow>
-                                    <TableCell colSpan={7} align="center">
+                                    <TableCell colSpan={8} align="center">
                                         <CircularProgress sx={{ color: '#BE7A3A' }} />
                                     </TableCell>
                                 </TableRow>
                             ) : (
                                 <TableRow>
-                                    <TableCell colSpan={7} align="center">
+                                    <TableCell colSpan={8} align="center">
                                         No employees found.
                                     </TableCell>
                                 </TableRow>
