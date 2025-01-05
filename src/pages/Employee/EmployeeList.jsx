@@ -53,7 +53,7 @@ const EmployeeList = () => {
                         },
                     }}
                 >
-                    Employee List
+                    Employee&apos;s List
                 </Typography>
 
                 <TableContainer sx={{ borderRadius: 4, overflow: "auto", boxShadow: 3 }}>
