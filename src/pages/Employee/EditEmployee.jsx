@@ -1,8 +1,8 @@
 import { Label, TextInput } from "flowbite-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { AiOutlineDelete } from "react-icons/ai";
 import { CiSaveDown2 } from "react-icons/ci";
+import { MdOutlineCancel } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { employeeView, updateEmployee } from "../../reducers/EmployeeSlice";
@@ -100,7 +100,7 @@ const EditEmployee = () => {
                                                     {loadingUpdate ? "Saving..." : "Save"} <CiSaveDown2 className="text-xl ml-1" />
                                                 </button>
                                                 <button type="button" onClick={() => { navigate("/") }} className="bg-[#A63535] hover:bg-black text-white text-base px-5 py-1.5 rounded-lg mr-0 flex items-center">
-                                                    Cancel <AiOutlineDelete className="text-xl ml-1" />
+                                                    Cancel <MdOutlineCancel className="text-xl ml-1" />
                                                 </button>
                                             </div>
                                         </div>
